@@ -74,10 +74,26 @@ h1 {
     margin-top: 40px;
 }
 
-a {
+.units a {
     color: white;
 }
 
-a:hover {
+.units a:hover {
     color: #F8CF06;
+}
+
+footer,
+.source {
+    font-size: 0.8125rem;
+    color: #537895;
+    text-align: center;
+}
+
+a.source {
+    font-weight: 500;
+
+}
+
+p.name {
+    padding: 10px;
 }
