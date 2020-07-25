@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="https://kit.fontawesome.com/ce2ce2adab.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search for city..." aria-label="cityName"
+                        aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h1 class="city">Lisbon</h1>
+                <p class="date">Sunday, 28 June</p>
+                <div class="temperature">
+                    <span class="temperature-number">25</span>
+                    <span class="units"><a href="#" id="celsius">ºC</a> | <a href="#" id="fahrenheit">ºF</a></span>
+                </div>
+            </div>
+            <div class="col">
+                <img class="dayIcon" src="images/weather_icons_dovora_interactive/PNG/512/day_clear.png" />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Mon</h5>
+                <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/wind.png" />
+                <h5>17º / 26º</h5>
+            </div>
+            <div class="col">
+                <h5>Tue</h5>
+                <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/day_rain.png" />
+                <h5>17º / 26º</h5>
+            </div>
+            <div class="col">
+                <h5>Wed</h5>
+                <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/rain.png" />
+                <h5>17º / 26º</h5>
+            </div>
+            <div class="col">
+                <h5>Thu</h5>
+                <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/fog.png" />
+                <h5>17º / 26º</h5>
+            </div>
+            <div class="col">
+                <h5>Fri</h5>
+                <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/day_clear.png" />
+                <h5>17º / 26º</h5>
+            </div>
+            <script src="src/script.js"></script>
+</body>
+
+</html>

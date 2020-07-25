@@ -1,0 +1,83 @@
+.container {
+    border: 1px solid grey;
+    width: 540px;
+    height: 570px;
+    margin: 50px auto;
+    display: block;
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    color: white
+}
+
+h5 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 15px;
+}
+
+.form-control,
+.input-group-text {
+    border-radius: 20px;
+    font-style: italic;
+    font-size: 0.875rem
+}
+
+.form-control {
+    padding: 6px 0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.input-group-text {
+    background-color: white;
+    border: none;
+}
+
+.input-group>.form-control:not(:first-child) {
+    border: none;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.temperature {
+    position: relative;
+    top: -20px;
+}
+
+.temperature-number {
+    font-size: 64px;
+}
+
+.units {
+    position: relative;
+    top: -34px;
+}
+
+.weekDaysIcon {
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+.dayIcon {
+    width: 200px;
+}
+
+.row {
+    margin: 20px;
+}
+
+.input-group {
+    margin-top: 40px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: #F8CF06;
+}
