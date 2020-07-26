@@ -45,60 +45,65 @@ const formatDate = () => {
 let insertDate = document.querySelector(".date");
 insertDate.innerHTML = formatDate();
 
-const doSearch = (event) => {
-  event.preventDefault;
-  let city = document.querySelector(".form-control");
-  let currentCity = document.querySelector(".city");
-  currentCity.innerHTML = city.value;
-  doMetric(city.value)
+const celsiusToF = () => {
+  event.preventDefault();
+  let currentCelsiusTemp = document.querySelector(".temperature-number").innerHTML;
+  let farenheitTemp = Math.round((currentCelsiusTemp * 9) / 5 + 32);
+  document.querySelector(".temperature-number").innerHTML = farenheitTemp;
 };
 
-let search = document.querySelector(".input-group");
-search.addEventListener("change", doSearch);
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", celsiusToF);
 
+
+const fahrenheitToC = () => {
+  event.preventDefault();
+  let currentFarTemp = document.querySelector(".temperature-number").innerHTML;
+  let celsiusTemp = Math.round((5 / 9) * (currentFarTemp - 32));
+  document.querySelector(".temperature-number").innerHTML = celsiusTemp;
+};
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", fahrenheitToC);
+
+
+
+//completar
+const displayWeatherCondition = response => {
+  document.querySelector(".city").innerHTML = response.data.name;
+  let citySearched = document.querySelector(".form-control");
+  citySearched.value = "";
+  let temperatureCelsius = Math.round(response.data.main.temp);
+  document.querySelector(".temperature-number").innerHTML = temperatureCelsius;
+}
+
+const searchLocation = position => {
+  let apiKey = '5f472b7acba333cd8a035ea85a0d4d4c';
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+const getLocation = event => {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
 
 const doMetric = citySearched => {
   let apiKey = '5f472b7acba333cd8a035ea85a0d4d4c';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=metric&APPID=${apiKey}`;
-  axios.get(apiUrl).then(getTemperatureCelsius);
-
+  axios.get(apiUrl).then(displayWeatherCondition);
 }
 
-const getTemperatureCelsius = response => {
-  let tempCel = Math.round(response.data.main.temp);
-  currentTemperature.innerHTML = tempCel;
-  temperatureAndType.temperature = tempCel;
-  temperatureAndType.type = "Celsius";
+const doSearch = event => {
+  event.preventDefault();
+  let citySearched = document.querySelector(".form-control").value;
+  doMetric(citySearched);
 }
 
-let temperatureAndType = {
-  temperature: 26,
-  type: "Celsius",
-};
-let currentTemperature = document.querySelector(".temperature-number");
-currentTemperature.innerHTML = temperatureAndType.temperature;
+let searchForm = document.querySelector(".form-inline");
+searchForm.addEventListener("submit", doSearch);
 
+let currentLocationButton = document.querySelector("#current-location");
+currentLocationButton.addEventListener("click", getLocation);
 
-const celsiusToF = () => {
-  if (temperatureAndType.type === "Celsius") {
-    let far = Math.round((temperatureAndType.temperature * 9) / 5 + 32);
-    currentTemperature.innerHTML = far;
-    temperatureAndType.temperature = far;
-    temperatureAndType.type = "Farenheit";
-  }
-};
-
-const fahrenheitToC = () => {
-  if (temperatureAndType.type === "Farenheit") {
-    let cel = Math.round((5 / 9) * (temperatureAndType.temperature - 32));
-    currentTemperature.innerHTML = cel;
-    temperatureAndType.temperature = cel;
-    temperatureAndType.type = "Celsius";
-  }
-};
-
-let celsius = document.querySelector("#celsius");
-let fahrenheit = document.querySelector("#fahrenheit");
-
-celsius.addEventListener("click", fahrenheitToC);
-fahrenheit.addEventListener("click", celsiusToF);
+doMetric("Lisbon");
