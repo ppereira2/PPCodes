@@ -55,14 +55,6 @@ h1 {
     width: 300px;
 }
 
-.units a {
-    color: white;
-}
-
-.units a:hover {
-    color: #F8CF06;
-}
-
 footer,
 .source {
     font-size: 0.8125rem;
@@ -70,11 +62,26 @@ footer,
     text-align: center;
 }
 
+a {
+    color: #F8CF06;
+}
+
+a:hover {
+    color: white;
+}
+
 a.source {
     font-weight: 500;
-
 }
 
 p.name {
     padding: 10px;
+}
+
+.temperature .active {
+    color: white
+}
+
+.temperature .active:hover {
+    text-decoration: none;
 }

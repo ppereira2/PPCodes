@@ -47,7 +47,8 @@ insertDate.innerHTML = formatDate();
 
 const celsiusToF = () => {
   event.preventDefault();
-  let currentCelsiusTemp = document.querySelector(".temperature-number").innerHTML;
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
   let farenheitTemp = Math.round((currentCelsiusTemp * 9) / 5 + 32);
   document.querySelector(".temperature-number").innerHTML = farenheitTemp;
 };
@@ -58,9 +59,9 @@ fahrenheit.addEventListener("click", celsiusToF);
 
 const fahrenheitToC = () => {
   event.preventDefault();
-  let currentFarTemp = document.querySelector(".temperature-number").innerHTML;
-  let celsiusTemp = Math.round((5 / 9) * (currentFarTemp - 32));
-  document.querySelector(".temperature-number").innerHTML = celsiusTemp;
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  document.querySelector(".temperature-number").innerHTML = currentCelsiusTemp;
 };
 
 let celsius = document.querySelector("#celsius");
@@ -73,8 +74,8 @@ const displayWeatherCondition = response => {
   document.querySelector(".city").innerHTML = response.data.name;
   let citySearched = document.querySelector(".form-control");
   citySearched.value = "";
-  let temperatureCelsius = Math.round(response.data.main.temp);
-  document.querySelector(".temperature-number").innerHTML = temperatureCelsius;
+  currentCelsiusTemp = Math.round(response.data.main.temp);
+  document.querySelector(".temperature-number").innerHTML = Math.round(currentCelsiusTemp);
 }
 
 const searchLocation = position => {
@@ -99,6 +100,8 @@ const doSearch = event => {
   let citySearched = document.querySelector(".form-control").value;
   doMetric(citySearched);
 }
+
+let currentCelsiusTemp = null;
 
 let searchForm = document.querySelector(".form-inline");
 searchForm.addEventListener("submit", doSearch);
