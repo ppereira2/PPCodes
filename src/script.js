@@ -101,7 +101,7 @@ const displayForecast = response => {
     forecastElement.innerHTML += `
     <div class="col" >
       <h5 id="day-0">${formatHours(forecast.dt * 1000)}</h5>
-      <img class="weekDaysIcon" src="images/weather_icons_dovora_interactive/PNG/512/${iconHtml}">
+      <img class="weekdays-icon" src="images/weather_icons_dovora_interactive/PNG/512/${iconHtml}">
       <h5 id="day-temp-0">${forecastTempMin}º / ${forecastTempMax}º</h5>
             </div >
             `;

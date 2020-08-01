@@ -32,7 +32,7 @@ h1 {
     top: -34px;
 }
 
-.weekDaysIcon {
+.weekdays-icon {
     width: 50px;
     display: block;
     margin: 0 auto;
@@ -44,7 +44,7 @@ h1 {
 
 .row,
 .form-row {
-    margin: 30px;
+    margin: 20px;
 }
 
 .form-row {
