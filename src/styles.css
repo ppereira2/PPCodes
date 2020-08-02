@@ -1,7 +1,7 @@
 .container {
   border: 1px solid grey;
   width: 550px;
-  height: 570px;
+  height: 580px;
   margin: 50px auto;
   display: block;
   background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
@@ -45,7 +45,7 @@ h1 {
 
 .row,
 .form-row {
-  margin: 25px;
+  margin: 20px;
 }
 
 .form-row {
@@ -85,4 +85,23 @@ p.name {
 
 .temperature .active:hover {
   text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+#forecast {
+  margin-top: 0;
+}
+
+#description {
+  text-transform: capitalize;
+}
+
+#date {
+  font-size: 18px;
 }

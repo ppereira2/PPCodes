@@ -90,12 +90,19 @@ const displayWeatherCondition = response => {
   citySearched.value = "";
   currentCelsiusTemp = Math.round(response.data.main.temp);
   document.querySelector(".temperature-number").innerHTML = Math.round(currentCelsiusTemp);
-  let insertDate = document.querySelector(".date");
+  let insertDate = document.querySelector("#date");
   insertDate.innerHTML = formatDate(response.data.dt * 1000) + ' ' + formatHours(response.data.dt * 1000);
   let currentDayElement = document.querySelector('.day-icon');
   let iconDay = getIconFromWeather(response.data.weather[0].icon);
   currentDayElement.setAttribute("src", `images/weather_icons_dovora_interactive/PNG/512/${iconDay}`);
   currentDayElement.setAttribute("alt", response.data.weather[0].description);
+  let windSpeedElement = document.querySelector('#wind');
+  windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
+  let humidityElement = document.querySelector('#humidity');
+  humidityElement.innerHTML = response.data.main.humidity;
+  let weatherDescriptionElement = document.querySelector('#description');
+  weatherDescriptionElement.innerHTML = response.data.weather[0].description;
+
 };
 
 const displayForecast = response => {
@@ -165,7 +172,6 @@ const doMetricOrFarenheit = (citySearched, metricOrFahrenheit) => {
   let degrees = metricOrFahrenheit === 'metric' ? 'metric' : 'imperial';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=${degrees}&APPID=${apiKey}`;
   axios.get(apiUrl).then(displayWeatherCondition);
-
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearched}&units=${degrees}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
 
