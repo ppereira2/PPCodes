@@ -57,6 +57,11 @@ const celsiusToF = () => {
   fahrenheit.classList.add("active");
   let farenheitTemp = Math.round((currentCelsiusTemp * 9) / 5 + 32);
   document.querySelector(".temperature-number").innerHTML = farenheitTemp;
+
+  for (let i = 0; i < 5; i++) {
+    document.querySelector(`#min-${i}`).innerHTML = Math.round((currentMinMaxTemp[i].min * 9) / 5 + 32);
+    document.querySelector(`#max-${i}`).innerHTML = Math.round((currentMinMaxTemp[i].max * 9) / 5 + 32);
+  }
 };
 
 let fahrenheit = document.querySelector("#fahrenheit");
@@ -68,6 +73,11 @@ const fahrenheitToC = () => {
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
   document.querySelector(".temperature-number").innerHTML = currentCelsiusTemp;
+
+  for (let i = 0; i < 5; i++) {
+    document.querySelector(`#min-${i}`).innerHTML = currentMinMaxTemp[i].min;
+    document.querySelector(`#max-${i}`).innerHTML = currentMinMaxTemp[i].max;
+  }
 };
 
 let celsius = document.querySelector("#celsius");
@@ -86,7 +96,7 @@ const displayWeatherCondition = response => {
   let iconDay = getIconFromWeather(response.data.weather[0].icon);
   currentDayElement.setAttribute("src", `images/weather_icons_dovora_interactive/PNG/512/${iconDay}`);
   currentDayElement.setAttribute("alt", response.data.weather[0].description);
-}
+};
 
 const displayForecast = response => {
   let forecastElement = document.querySelector('#forecast');
@@ -95,19 +105,22 @@ const displayForecast = response => {
 
   for (let i = 0; i < 5; i++) {
     forecast = response.data.list[i];
-    console.log(forecast)
+
     let forecastTempMin = Math.round(forecast.main.temp_min);
+    currentMinMaxTemp[i].min = forecastTempMin;
     let forecastTempMax = Math.round(forecast.main.temp_max);
+    currentMinMaxTemp[i].max = forecastTempMax;
     let iconHtml = getIconFromWeather(forecast.weather[0].icon);
     forecastElement.innerHTML += `
     <div class="col" >
-      <h5 id="day-0">${formatHours(forecast.dt * 1000)}</h5>
+      <h5 id="day-${i}">${formatHours(forecast.dt * 1000)}</h5>
       <img class="weekdays-icon" src="images/weather_icons_dovora_interactive/PNG/512/${iconHtml}">
-      <h5 id="day-temp-0">${forecastTempMin}º / ${forecastTempMax}º</h5>
+      <h5 id="day-temp-${i}"><span id="min-${i}">${forecastTempMin}</span>º / <span id="max-${i}">${forecastTempMax}</span>º</h5>
             </div >
             `;
   }
-}
+
+};
 
 const getIconFromWeather = forecastWeatherMain => {
   if (forecastWeatherMain == '01d') {
@@ -135,6 +148,11 @@ const searchLocation = position => {
   let apiKey = '5f472b7acba333cd8a035ea85a0d4d4c';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
+
+
 }
 
 const getLocation = event => {
@@ -142,22 +160,46 @@ const getLocation = event => {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-const doMetric = citySearched => {
+const doMetricOrFarenheit = (citySearched, metricOrFahrenheit) => {
   let apiKey = '5f472b7acba333cd8a035ea85a0d4d4c';
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=metric&APPID=${apiKey}`;
+  let degrees = metricOrFahrenheit === 'metric' ? 'metric' : 'imperial';
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=${degrees}&APPID=${apiKey}`;
   axios.get(apiUrl).then(displayWeatherCondition);
 
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearched}&units=metric&appid=${apiKey}`;
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearched}&units=${degrees}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
+
 }
 
 const doSearch = event => {
   event.preventDefault();
   let citySearched = document.querySelector(".form-control").value;
-  doMetric(citySearched);
+  doMetricOrFarenheit(citySearched, 'metric');
 }
 
 let currentCelsiusTemp = null;
+let currentMinMaxTemp = [{
+    min: null,
+    max: null,
+  },
+  {
+    min: null,
+    max: null,
+  },
+  {
+    min: null,
+    max: null,
+  },
+  {
+    min: null,
+    max: null,
+  },
+  {
+    min: null,
+    max: null,
+  },
+];
+
 
 let searchForm = document.querySelector(".form-inline");
 searchForm.addEventListener("submit", doSearch);
@@ -165,4 +207,4 @@ searchForm.addEventListener("submit", doSearch);
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getLocation);
 
-doMetric("Lisbon");
+doMetricOrFarenheit("Lisbon", 'metric');
