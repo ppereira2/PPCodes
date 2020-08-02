@@ -1,88 +1,88 @@
 .container {
-    border: 1px solid grey;
-    width: 540px;
-    height: 570px;
-    margin: 50px auto;
-    display: block;
-    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
-    color: white
+  border: 1px solid grey;
+  width: 550px;
+  height: 570px;
+  margin: 50px auto;
+  display: block;
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+  color: white;
 }
 
 h5 {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 15px;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 15px;
 }
 
 h1 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .temperature {
-    position: relative;
-    top: -20px;
+  position: relative;
+  top: -20px;
 }
 
 .temperature-number {
-    font-size: 64px;
+  font-size: 64px;
 }
 
 .units {
-    position: relative;
-    top: -34px;
+  position: relative;
+  top: -34px;
 }
 
 .weekdays-icon {
-    width: 50px;
-    display: block;
-    margin: 0 auto;
+  width: 50px;
+  display: block;
+  margin: 0 auto;
 }
 
 .day-icon {
-    width: 200px;
-    padding-top: 20px;
+  width: 200px;
+  padding-top: 20px;
 }
 
 .row,
 .form-row {
-    margin: 25px;
+  margin: 25px;
 }
 
 .form-row {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .form-inline .form-control {
-    width: 300px;
+  width: 300px;
 }
 
 footer,
 .source {
-    font-size: 0.8125rem;
-    color: #537895;
-    text-align: center;
+  font-size: 0.8125rem;
+  color: #537895;
+  text-align: center;
 }
 
 a {
-    color: #F8CF06;
+  color: #f8cf06;
 }
 
 a:hover {
-    color: white;
+  color: white;
 }
 
 a.source {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 p.name {
-    padding: 10px;
+  padding: 10px;
 }
 
 .temperature .active {
-    color: white
+  color: white;
 }
 
 .temperature .active:hover {
-    text-decoration: none;
+  text-decoration: none;
 }

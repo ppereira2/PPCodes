@@ -95,6 +95,7 @@ const displayForecast = response => {
 
   for (let i = 0; i < 5; i++) {
     forecast = response.data.list[i];
+    console.log(forecast)
     let forecastTempMin = Math.round(forecast.main.temp_min);
     let forecastTempMax = Math.round(forecast.main.temp_max);
     let iconHtml = getIconFromWeather(forecast.weather[0].icon);
@@ -114,9 +115,9 @@ const getIconFromWeather = forecastWeatherMain => {
   } else if (forecastWeatherMain == '01n') {
     return 'night_half_moon_clear.png'
   } else if (forecastWeatherMain == '02n') {
-    return 'day_partial_cloud.png'
-  } else if (forecastWeatherMain == '02d') {
     return 'night_half_moon_partial_cloud.png'
+  } else if (forecastWeatherMain == '02d') {
+    return 'day_partial_cloud.png'
   } else if (forecastWeatherMain == '03d' || forecastWeatherMain == '03n' || forecastWeatherMain == '04d' || forecastWeatherMain == '04n') {
     return 'cloudy.png'
   } else if (forecastWeatherMain == '09d' || forecastWeatherMain == '09n' || forecastWeatherMain == '10d' || forecastWeatherMain == '10n') {
